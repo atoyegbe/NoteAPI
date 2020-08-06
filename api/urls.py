@@ -1,8 +1,9 @@
+from django.urls import path, include
 
-from rest_framework import routers
-from .api import NoteViewSet
+from . import views
 
-router = routers.DefaultRouter()
-router.register('api/notes', NoteViewSet, 'notes')
-
-urlpatterns = router.urls
+urlpatterns = [
+    path('', views.ListNote.as_view()),
+    path('<int:pk>/', views.DetailNote.as_view()),
+    path('rest-auth/', include('rest_auth.urls')),
+]
